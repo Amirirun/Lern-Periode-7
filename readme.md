@@ -28,9 +28,16 @@
 - [x] Cryptowährungen sollen ausgelesen werden
 - [x] Suchfunktion für Kryptowährungen verbessern
 - [x] Mit dem Aufbau des Kursverlaufs-Charts beginnen
-✍️ Heute habe ich... (50-100 Wörter)
 
-☝️ Vergessen Sie nicht, Ihren Code auf github hochzuladen
+Heute habe ich viel fürs design und den chart programmiert, die cryptowährungen können ausgelsen werden und es kann ein chart für die jeweilige kryptowährung erstellt werden.
+
+
+
+## 07.11
+- [ ] Zeitraum-Auswahl einbauen
+- [ ] Aktuellen Preis extra anzeigen   
+- [ ] Autocomplete-Suchfunktion umsetzen
+- [ ] Chart optisch schöner gestalten
 
 
 
