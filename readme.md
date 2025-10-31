@@ -24,12 +24,13 @@
 
 ## 31.10.
 
-- [ ] Kryptowährungen erkennen (Nutzereingabe)
-- [ ] Cryptowährungen sollen ausgelesen werden
-- [ ] Suchfunktion für Kryptowährungen verbessern
-- [ ] Mit dem Aufbau des Kursverlaufs-Charts beginnen
+- [x] Kryptowährungen erkennen (Nutzereingabe)
+- [x] Cryptowährungen sollen ausgelesen werden
+- [x] Suchfunktion für Kryptowährungen verbessern
+- [x] Mit dem Aufbau des Kursverlaufs-Charts beginnen
 ✍️ Heute habe ich... (50-100 Wörter)
 
 ☝️ Vergessen Sie nicht, Ihren Code auf github hochzuladen
+
 
 
