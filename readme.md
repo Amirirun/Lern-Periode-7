@@ -34,10 +34,11 @@ Heute habe ich viel fürs design und den chart programmiert, die cryptowährunge
 
 
 ## 07.11
-- [ ] Zeitraum-Auswahl einbauen
-- [ ] Aktuellen Preis extra anzeigen   
-- [ ] Autocomplete-Suchfunktion umsetzen
-- [ ] Chart optisch schöner gestalten
+- [X] Zeitraum-Auswahl einbauen
+- [X] Aktuellen Preis extra anzeigen   
+- [X] Autocomplete-Suchfunktion umsetzen
+- [X] Chart optisch schöner gestalten
+
 
 
 
