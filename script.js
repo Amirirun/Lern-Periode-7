@@ -1,42 +1,56 @@
-const API_KEY = '289c13182357680f0e6e508a70dc260d11a29e16f1824c3f959e64b79622a6d0';
 const chartCanvas = document.getElementById('priceChart');
+const cryptoInput = document.getElementById('cryptoInput');
+const priceDisplay = document.getElementById('priceDisplay');
+const autocompleteList = document.getElementById('autocomplete-list');
+
 let chartInstance;
 
+const coins = [
+  'bitcoin', 'ethereum', 'dogecoin', 'litecoin', 'solana', 'cardano', 'polkadot', 'tron', 'avalanche', 'shiba'
+];
+
+
+cryptoInput.addEventListener('input', () => {
+  const value = cryptoInput.value.toLowerCase();
+  autocompleteList.innerHTML = '';
+
+  if (!value) return;
+
+  const filtered = coins.filter(coin => coin.startsWith(value));
+  filtered.forEach(coin => {
+    const li = document.createElement('li');
+    li.textContent = coin;
+    li.onclick = () => {
+      cryptoInput.value = coin;
+      autocompleteList.innerHTML = '';
+    };
+    autocompleteList.appendChild(li);
+  });
+});
+
 async function loadChart() {
-  const symbol = document.getElementById('cryptoInput').value.trim().toLowerCase();
+  const symbol = cryptoInput.value.trim().toLowerCase();
   if (!symbol) {
-    alert('Bitte gib eine Währung ein (z.B. bitcoin)');
+    alert('Bitte gib eine Kryptowährung ein (z. B. bitcoin)');
     return;
   }
 
   try {
-    const response = await fetch(`https://api.coingecko.com/api/v3/coins/${symbol}/market_chart?vs_currency=usd&days=7`);
-    
-    if (!response.ok) {
-      throw new Error("Kryptowährung nicht gefunden oder API-Fehler");
-    }
+ 
+    const chartRes = await fetch(`https://api.coingecko.com/api/v3/coins/${symbol}/market_chart?vs_currency=usd&days=7`);
+    if (!chartRes.ok) throw new Error("API-Fehler beim Chart");
+    const chartData = await chartRes.json();
 
-    const data = await response.json();
-
-    
-    const prices = data.prices.map(p => ({
+    const prices = chartData.prices.map(p => ({
       time: new Date(p[0]).toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit" }),
       value: p[1]
     }));
 
-    console.log("Erkannte Kryptowährung:", symbol);
-    console.log("Preisdaten:", prices);
-
-    
     const labels = prices.map(p => p.time);
     const values = prices.map(p => p.value);
 
-    
-    if (chartInstance) {
-      chartInstance.destroy();
-    }
+    if (chartInstance) chartInstance.destroy();
 
-    
     chartInstance = new Chart(chartCanvas, {
       type: 'line',
       data: {
@@ -45,8 +59,45 @@ async function loadChart() {
           label: `${symbol.toUpperCase()} Kursverlauf (USD)`,
           data: values,
           borderColor: '#00ffff',
+          backgroundColor: 'rgba(0,255,255,0.05)',
           borderWidth: 2,
-          fill: false,
-          tension: 0.2,
-          pointRadius: 0
-      
+          fill: true,
+          tension: 0.3,
+          pointRadius: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            ticks: { color: '#00ffff' },
+            grid: { color: 'rgba(0,255,255,0.1)' }
+          },
+          y: {
+            ticks: { color: '#00ffff' },
+            grid: { color: 'rgba(0,255,255,0.1)' }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: { color: '#00ffff' }
+          }
+        }
+      }
+    });
+
+   
+    const coinRes = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${symbol}&vs_currencies=usd`);
+    const coinData = await coinRes.json();
+
+    if (coinData[symbol]) {
+      priceDisplay.textContent = ` Aktueller Preis: $${coinData[symbol].usd.toFixed(2)}`;
+    } else {
+      priceDisplay.textContent = ' Preis nicht verfügbar';
+    }
+
+  } catch (err) {
+    console.error(err);
+    alert("Fehler beim Laden. Stelle sicher, dass die Kryptowährung korrekt geschrieben ist.");
+  }
+}
