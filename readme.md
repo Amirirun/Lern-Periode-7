@@ -39,6 +39,16 @@ Heute habe ich viel fürs design und den chart programmiert, die cryptowährunge
 - [X] Autocomplete-Suchfunktion umsetzen
 - [X] Chart optisch schöner gestalten
 
+Heute habe ich noch einiges am Chart verbessert, man kann jetzt direkt den aktuellen Preis sehen und wenn man schonmal eine Crytwährung wie z.B Bitcoin schonmal gesucht hat wird sie einem direkt vorgeschlagen.
+
+
+## 14.11
+- [ ] Ich habe noch ein paar Bugs in der Suchleiste die ich beheben möchte
+- [ ] Die Autosuche funktioniert auch noch nicht ganz korrekt, dort habe ich auch noch ein paar Probleme die ich fixxen muss.
+- [ ] Ich möchte das Design noch weiter ausarbeiten.
+- [ ] Tabelle mit allen aktuellen Preisen erstellen.
+
+
 
 
 
