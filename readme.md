@@ -43,11 +43,18 @@ Heute habe ich noch einiges am Chart verbessert, man kann jetzt direkt den aktue
 
 
 ## 14.11
-- [ ] Ich habe noch ein paar Bugs in der Suchleiste die ich beheben möchte
-- [ ] Die Autosuche funktioniert auch noch nicht ganz korrekt, dort habe ich auch noch ein paar Probleme die ich fixxen muss.
-- [ ] Ich möchte das Design noch weiter ausarbeiten.
-- [ ] Tabelle mit allen aktuellen Preisen erstellen.
+- [x] Ich habe noch ein paar Bugs in der Suchleiste die ich beheben möchte
+- [x] Die Autosuche funktioniert auch noch nicht ganz korrekt, dort habe ich auch noch ein paar Probleme die ich fixxen muss.
+- [x] Ich möchte das Design noch weiter ausarbeiten.
+- [x] Tabelle mit allen aktuellen Preisen erstellen.
 
+Heute habe ich mehrere Verbesserungen an meinem Big-Crypt-Projekt umgesetzt. Ich habe Bugs in der Suchleiste behoben und die Autosuche optimiert. Außerdem habe ich das Design weiter ausgebaut und moderner gestaltet. Zusätzlich habe ich erfolgreich eine Tabelle mit allen aktuellen Kryptowährungspreisen integriert.
+      
+## 21.11
+- [ ] Ich möchte den Bug fixen, bei dem die Preistabelle mehrfach angezeigt wird.
+- [ ] Ich möchte die Autosuche verbessern, damit auch Tippfehler wie „bitcion“ erkannt werden.
+- [ ] Ich möchte das Design der Seite erweitern, besonders Buttons und Header modernisieren.
+- [ ] Ich möchte auswählen können, über welchen Zeitraum der Chart angezeigt wird (7 Tage, 30 Tage, 90 Tage, 1 Jahr).
 
 
 
