@@ -29,11 +29,24 @@ input {
   width: 250px;
 }
 
+input:focus {
+  outline: none;
+  box-shadow: 0 0 8px #00ffff;
+}
+
 button {
   padding: 10px 15px;
   font-size: 16px;
   margin-left: 10px;
   cursor: pointer;
+  background: #00ffff;
+  border: none;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+button:hover {
+  box-shadow: 0 0 10px #00ffff;
 }
 
 #priceDisplay {
@@ -79,4 +92,23 @@ canvas {
 
 .autocomplete-list li:hover {
   background-color: #333;
+}
+
+.price-table {
+  width: 80%;
+  margin: 30px auto;
+  border-collapse: collapse;
+  color: #00ffff;
+  font-size: 18px;
+}
+
+.price-table th {
+  text-align: left;
+  border-bottom: 2px solid #00ffff;
+  padding-bottom: 10px;
+}
+
+.price-table td {
+  padding: 10px 0;
+  border-bottom: 1px solid #333;
 }

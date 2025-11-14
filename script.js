@@ -6,17 +6,17 @@ const autocompleteList = document.getElementById('autocomplete-list');
 let chartInstance;
 
 const coins = [
-  'bitcoin', 'ethereum', 'dogecoin', 'litecoin', 'solana', 'cardano', 'polkadot', 'tron', 'avalanche', 'shiba'
+  'bitcoin', 'ethereum', 'dogecoin', 'litecoin', 'solana',
+  'cardano', 'polkadot', 'tron', 'avalanche', 'shiba'
 ];
-
 
 cryptoInput.addEventListener('input', () => {
   const value = cryptoInput.value.toLowerCase();
   autocompleteList.innerHTML = '';
-
   if (!value) return;
 
-  const filtered = coins.filter(coin => coin.startsWith(value));
+  const filtered = coins.filter(coin => coin.includes(value));
+
   filtered.forEach(coin => {
     const li = document.createElement('li');
     li.textContent = coin;
@@ -28,17 +28,25 @@ cryptoInput.addEventListener('input', () => {
   });
 });
 
+cryptoInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    loadChart();
+    autocompleteList.innerHTML = '';
+  }
+});
+
 async function loadChart() {
   const symbol = cryptoInput.value.trim().toLowerCase();
   if (!symbol) {
-    alert('Bitte gib eine Kryptowährung ein (z. B. bitcoin)');
+    showError("Bitte gib eine Kryptowährung ein.");
     return;
   }
 
   try {
- 
-    const chartRes = await fetch(`https://api.coingecko.com/api/v3/coins/${symbol}/market_chart?vs_currency=usd&days=7`);
-    if (!chartRes.ok) throw new Error("API-Fehler beim Chart");
+    const chartRes = await fetch(
+      `https://api.coingecko.com/api/v3/coins/${symbol}/market_chart?vs_currency=usd&days=7`
+    );
+    if (!chartRes.ok) throw new Error();
     const chartData = await chartRes.json();
 
     const prices = chartData.prices.map(p => ({
@@ -66,38 +74,62 @@ async function loadChart() {
           pointRadius: 2
         }]
       },
-      options: {
-        responsive: true,
-        scales: {
-          x: {
-            ticks: { color: '#00ffff' },
-            grid: { color: 'rgba(0,255,255,0.1)' }
-          },
-          y: {
-            ticks: { color: '#00ffff' },
-            grid: { color: 'rgba(0,255,255,0.1)' }
-          }
-        },
-        plugins: {
-          legend: {
-            labels: { color: '#00ffff' }
-          }
-        }
-      }
+      options: { responsive: true }
     });
 
-   
-    const coinRes = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${symbol}&vs_currencies=usd`);
+    const coinRes = await fetch(
+      `https://api.coingecko.com/api/v3/simple/price?ids=${symbol}&vs_currencies=usd&include_24hr_change=true`
+    );
     const coinData = await coinRes.json();
+    console.log(coinData);
 
     if (coinData[symbol]) {
-      priceDisplay.textContent = ` Aktueller Preis: $${coinData[symbol].usd.toFixed(2)}`;
+      priceDisplay.textContent =
+        `Aktueller Preis: $${coinData[symbol].usd.toFixed(2)} (${coinData[symbol].usd_24h_change.toFixed(2)}% 24h)`;
     } else {
-      priceDisplay.textContent = ' Preis nicht verfügbar';
+      priceDisplay.textContent = 'Preis nicht verfügbar';
     }
 
+    loadPriceTable();
+
   } catch (err) {
-    console.error(err);
-    alert("Fehler beim Laden. Stelle sicher, dass die Kryptowährung korrekt geschrieben ist.");
+    showError("Kryptowährung nicht gefunden oder API-Fehler.");
   }
+}
+
+function showError(msg) {
+  priceDisplay.textContent = msg;
+  priceDisplay.style.color = "#ff4444";
+  setTimeout(() => (priceDisplay.style.color = "#00ff99"), 2000);
+}
+
+async function loadPriceTable() {
+  const res = await fetch(
+    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10"
+  );
+
+  const data = await res.json();
+
+  let html = `
+    <table class="price-table">
+      <tr>
+        <th>Name</th>
+        <th>Preis</th>
+        <th>24h %</th>
+      </tr>
+  `;
+
+  data.forEach(c => {
+    html += `
+      <tr>
+        <td>${c.name}</td>
+        <td>$${c.current_price.toFixed(2)}</td>
+        <td>${c.price_change_percentage_24h.toFixed(2)}%</td>
+      </tr>
+    `;
+  });
+
+  html += "</table>";
+
+  document.body.insertAdjacentHTML("beforeend", html);
 }
