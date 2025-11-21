@@ -2,20 +2,47 @@ const chartCanvas = document.getElementById('priceChart');
 const cryptoInput = document.getElementById('cryptoInput');
 const priceDisplay = document.getElementById('priceDisplay');
 const autocompleteList = document.getElementById('autocomplete-list');
+const tableSection = document.getElementById('table-section');
 
 let chartInstance;
+let selectedRange = 7;
 
 const coins = [
   'bitcoin', 'ethereum', 'dogecoin', 'litecoin', 'solana',
   'cardano', 'polkadot', 'tron', 'avalanche', 'shiba'
 ];
 
+function setRange(days) {
+  selectedRange = days;
+  loadChart();
+}
+
+function similarity(a, b) {
+  const longer = a.length > b.length ? a : b;
+  const shorter = a.length > b.length ? b : a;
+  const longerLength = longer.length;
+  if (longerLength === 0) return 1;
+  let same = 0;
+  for (let i = 0; i < shorter.length; i++) {
+    if (longer[i] === shorter[i]) same++;
+  }
+  return same / longerLength;
+}
+
 cryptoInput.addEventListener('input', () => {
   const value = cryptoInput.value.toLowerCase();
   autocompleteList.innerHTML = '';
   if (!value) return;
 
-  const filtered = coins.filter(coin => coin.includes(value));
+  let filtered = coins.filter(c => c.includes(value));
+
+  if (filtered.length === 0) {
+    filtered = coins
+      .map(c => ({ name: c, score: similarity(value, c) }))
+      .filter(s => s.score > 0.4)
+      .sort((a, b) => b.score - a.score)
+      .map(s => s.name);
+  }
 
   filtered.forEach(coin => {
     const li = document.createElement('li');
@@ -44,7 +71,7 @@ async function loadChart() {
 
   try {
     const chartRes = await fetch(
-      `https://api.coingecko.com/api/v3/coins/${symbol}/market_chart?vs_currency=usd&days=7`
+      `https://api.coingecko.com/api/v3/coins/${symbol}/market_chart?vs_currency=usd&days=${selectedRange}`
     );
     if (!chartRes.ok) throw new Error();
     const chartData = await chartRes.json();
@@ -81,7 +108,6 @@ async function loadChart() {
       `https://api.coingecko.com/api/v3/simple/price?ids=${symbol}&vs_currencies=usd&include_24hr_change=true`
     );
     const coinData = await coinRes.json();
-    console.log(coinData);
 
     if (coinData[symbol]) {
       priceDisplay.textContent =
@@ -104,6 +130,9 @@ function showError(msg) {
 }
 
 async function loadPriceTable() {
+  const existingTable = document.querySelector(".price-table");
+  if (existingTable) existingTable.remove();
+
   const res = await fetch(
     "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10"
   );
@@ -131,5 +160,5 @@ async function loadPriceTable() {
 
   html += "</table>";
 
-  document.body.insertAdjacentHTML("beforeend", html);
+  tableSection.insertAdjacentHTML("beforeend", html);
 }

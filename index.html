@@ -15,8 +15,14 @@
       <input type="text" id="cryptoInput" placeholder="Deine Kryptowährung (z. B. bitcoin)">
       <ul id="autocomplete-list" class="autocomplete-list"></ul>
       <button onclick="loadChart()">Go</button>
+      <div class="range-buttons">
+        <button onclick="setRange(7)">7 Tage</button>
+        <button onclick="setRange(30)">30 Tage</button>
+        <button onclick="setRange(90)">90 Tage</button>
+        <button onclick="setRange(365)">1 Jahr</button>
+      </div>
     </div>
-    <div id="priceDisplay"> Aktueller Preis: –</div>
+    <div id="priceDisplay">Aktueller Preis: –</div>
   </header>
 
   <img src="83cea0af7010ed2944668f645d68aea3.jpg" class="centered-image" width="300" alt="Crypto Bild">
@@ -24,5 +30,7 @@
   <section id="chart-section">
     <canvas id="priceChart" width="800" height="400"></canvas>
   </section>
+
+  <section id="table-section"></section>
 </body>
 </html>

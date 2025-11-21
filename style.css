@@ -49,6 +49,15 @@ button:hover {
   box-shadow: 0 0 10px #00ffff;
 }
 
+.range-buttons {
+  margin-top: 15px;
+}
+
+.range-buttons button {
+  margin: 4px;
+  padding: 8px 14px;
+}
+
 #priceDisplay {
   margin-top: 10px;
   font-size: 18px;
