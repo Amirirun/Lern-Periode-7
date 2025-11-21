@@ -51,10 +51,20 @@ Heute habe ich noch einiges am Chart verbessert, man kann jetzt direkt den aktue
 Heute habe ich mehrere Verbesserungen an meinem Big-Crypt-Projekt umgesetzt. Ich habe Bugs in der Suchleiste behoben und die Autosuche optimiert. Außerdem habe ich das Design weiter ausgebaut und moderner gestaltet. Zusätzlich habe ich erfolgreich eine Tabelle mit allen aktuellen Kryptowährungspreisen integriert.
       
 ## 21.11
-- [ ] Ich möchte den Bug fixen, bei dem die Preistabelle mehrfach angezeigt wird.
-- [ ] Ich möchte die Autosuche verbessern, damit auch Tippfehler wie „bitcion“ erkannt werden.
+- [x] Ich möchte den Bug fixen, bei dem die Preistabelle mehrfach angezeigt wird.
+- [x] Ich möchte die Autosuche verbessern, damit auch Tippfehler wie „bitcion“ erkannt werden.
+- [x] Ich möchte auswählen können, über welchen Zeitraum der Chart angezeigt wird (7 Tage, 30 Tage, 90 Tage, 1 Jahr).
 - [ ] Ich möchte das Design der Seite erweitern, besonders Buttons und Header modernisieren.
-- [ ] Ich möchte auswählen können, über welchen Zeitraum der Chart angezeigt wird (7 Tage, 30 Tage, 90 Tage, 1 Jahr).
+
+Heute habe ich als erstes den Preistabellen Bug behoben. Der Fehler war, dass die Tabelle bei jedem Laden des Charts erneut unten angehängt wurde, ohne die vorherige zu löschen, wodurch sie mehrfach angezeigt wurde. Ich habe das Problem gelöst, indem ich vor dem Einfügen einer neuen Tabelle prüfe, ob bereits eine existiert, und diese dann entferne, bevor ich die neue Tabelle erstelle.Danach habe ich die Autosuche verbessert, sodass auch Fehleingaben wie „bitcion“ oder „ethreum“ richtig erkannt und automatisch korrigiert werden. Zusätzlich habe ich die Möglichkeit ergänzt, den Zeitraum für den Chart frei zu wählen, zum Beispiel 7 Tage, 30 Tage, 90 Tage oder 1 Jahr.
+Das Design noch anpassen habe ich zeitlich nicht mehr geschafft, dass werde ich beim nächsten mal machen.
+      
+## 28.11
+- [ ] Ich möchte das Design der Seite erweitern, besonders Buttons und Header modernisieren.
+- [ ] Ich möchte dem Chart zusätzliche Informationen hinzufügen, zum Beispiel Hover-Details mit Höchst und Tiefstpreisen.
+- [ ] Ich möchte die Website mit ein paar Crypto Bildern lebendiger gestalten.
+- [ ] Ich möchte ein eigenes Logo entwerfen und intigrieren.
+
 
 
 
