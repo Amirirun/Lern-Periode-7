@@ -65,6 +65,15 @@ Das Design noch anpassen habe ich zeitlich nicht mehr geschafft, dass werde ich 
 - [ ] Ich möchte die Website mit ein paar Crypto Bildern lebendiger gestalten.
 - [ ] Ich möchte ein eigenes Logo entwerfen und intigrieren.
 
+Heute habe ich nichts für die Lern Periode 7 gemacht! Ich habe zusammen mit Damjan Handlungsziel 1 und 2 der LB  bearbeitet, da wir beiden einen Tag der LB Tag verpasst hatten. Die eigentlichen Arbeitspakete von dieser Woche nehme ich mir für nächsten Freitag vor.
+
+## 05.11
+- [ ] Ich möchte das Design der Seite erweitern, besonders Buttons und Header modernisieren.
+- [ ] Ich möchte dem Chart zusätzliche Informationen hinzufügen, zum Beispiel Hover-Details mit Höchst und Tiefstpreisen.
+- [ ] Ich möchte die Website mit ein paar Crypto Bildern lebendiger gestalten.
+- [ ] Ich möchte ein eigenes Logo entwerfen und intigrieren.
+
+
 
 
 
