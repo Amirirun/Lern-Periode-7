@@ -1,11 +1,15 @@
 const chartCanvas = document.getElementById('priceChart');
 const cryptoInput = document.getElementById('cryptoInput');
 const priceDisplay = document.getElementById('priceDisplay');
+const highLowDisplay = document.getElementById('highLowDisplay');
 const autocompleteList = document.getElementById('autocomplete-list');
 const tableSection = document.getElementById('table-section');
+const favoritesDiv = document.getElementById('favorites');
 
 let chartInstance;
 let selectedRange = 7;
+
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 const coins = [
   'bitcoin', 'ethereum', 'dogecoin', 'litecoin', 'solana',
@@ -17,16 +21,34 @@ function setRange(days) {
   loadChart();
 }
 
+function saveFavorites() {
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+}
+
+function renderFavorites() {
+  favoritesDiv.innerHTML = '<span>Favoriten:</span>';
+
+  favorites.forEach(coin => {
+    const item = document.createElement('span');
+    item.textContent = coin;
+    item.className = 'favorite-item';
+    item.onclick = () => {
+      cryptoInput.value = coin;
+      loadChart();
+    };
+    favoritesDiv.appendChild(item);
+  });
+}
+
 function similarity(a, b) {
   const longer = a.length > b.length ? a : b;
   const shorter = a.length > b.length ? b : a;
-  const longerLength = longer.length;
-  if (longerLength === 0) return 1;
+  if (longer.length === 0) return 1;
   let same = 0;
   for (let i = 0; i < shorter.length; i++) {
     if (longer[i] === shorter[i]) same++;
   }
-  return same / longerLength;
+  return same / longer.length;
 }
 
 cryptoInput.addEventListener('input', () => {
@@ -64,10 +86,7 @@ cryptoInput.addEventListener('keydown', e => {
 
 async function loadChart() {
   const symbol = cryptoInput.value.trim().toLowerCase();
-  if (!symbol) {
-    showError("Bitte gib eine Kryptowährung ein.");
-    return;
-  }
+  if (!symbol) return;
 
   try {
     const chartRes = await fetch(
@@ -84,24 +103,36 @@ async function loadChart() {
     const labels = prices.map(p => p.time);
     const values = prices.map(p => p.value);
 
+    const max = Math.max(...values);
+    const min = Math.min(...values);
+    highLowDisplay.textContent = `Hoch: $${max.toFixed(2)} | Tief: $${min.toFixed(2)}`;
+
     if (chartInstance) chartInstance.destroy();
 
     chartInstance = new Chart(chartCanvas, {
       type: 'line',
       data: {
-        labels: labels,
+        labels,
         datasets: [{
           label: `${symbol.toUpperCase()} Kursverlauf (USD)`,
           data: values,
           borderColor: '#00ffff',
           backgroundColor: 'rgba(0,255,255,0.05)',
-          borderWidth: 2,
           fill: true,
           tension: 0.3,
           pointRadius: 2
         }]
       },
-      options: { responsive: true }
+      options: {
+        responsive: true,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: ctx => `$${ctx.parsed.y.toFixed(2)}`
+            }
+          }
+        }
+      }
     });
 
     const coinRes = await fetch(
@@ -112,40 +143,33 @@ async function loadChart() {
     if (coinData[symbol]) {
       priceDisplay.textContent =
         `Aktueller Preis: $${coinData[symbol].usd.toFixed(2)} (${coinData[symbol].usd_24h_change.toFixed(2)}% 24h)`;
-    } else {
-      priceDisplay.textContent = 'Preis nicht verfügbar';
+    }
+
+    if (!favorites.includes(symbol)) {
+      favorites.push(symbol);
+      saveFavorites();
+      renderFavorites();
     }
 
     loadPriceTable();
 
-  } catch (err) {
-    showError("Kryptowährung nicht gefunden oder API-Fehler.");
+  } catch {
+    priceDisplay.textContent = "Fehler beim Laden";
   }
 }
 
-function showError(msg) {
-  priceDisplay.textContent = msg;
-  priceDisplay.style.color = "#ff4444";
-  setTimeout(() => (priceDisplay.style.color = "#00ff99"), 2000);
-}
-
 async function loadPriceTable() {
-  const existingTable = document.querySelector(".price-table");
-  if (existingTable) existingTable.remove();
+  const existing = document.querySelector('.price-table');
+  if (existing) existing.remove();
 
   const res = await fetch(
     "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10"
   );
-
   const data = await res.json();
 
   let html = `
     <table class="price-table">
-      <tr>
-        <th>Name</th>
-        <th>Preis</th>
-        <th>24h %</th>
-      </tr>
+      <tr><th>Name</th><th>Preis</th><th>24h %</th></tr>
   `;
 
   data.forEach(c => {
@@ -159,6 +183,7 @@ async function loadPriceTable() {
   });
 
   html += "</table>";
-
   tableSection.insertAdjacentHTML("beforeend", html);
 }
+
+renderFavorites();
