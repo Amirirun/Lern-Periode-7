@@ -67,11 +67,20 @@ Das Design noch anpassen habe ich zeitlich nicht mehr geschafft, dass werde ich 
 
 Heute habe ich nichts für die Lern Periode 7 gemacht! Ich habe zusammen mit Damjan Handlungsziel 1 und 2 der LB  bearbeitet, da wir beiden einen Tag der LB Tag verpasst hatten. Die eigentlichen Arbeitspakete von dieser Woche nehme ich mir für nächsten Freitag vor.
 
-## 05.11
+## 05.12
 - [x] Ich möchte das Design der Seite erweitern, besonders Buttons und Header modernisieren.
 - [x] Ich möchte dem Chart zusätzliche Informationen hinzufügen, zum Beispiel Hover-Details mit Höchst und Tiefstpreisen.
  - [x] Ich möchte eine favoriten Liste hinzufügen.
 - [x] Ich möchte ein eigenes Logo entwerfen und intigrieren.
+
+Heute habe ich noch eine Menge am Design gearbeitet. Zudem habe ich noch einige funktionen wie höchst und Tiefpreis und hinzugefügt. Dann intigrierte ich auch noch eine favoriten Liste.
+
+## 12.12
+- [ ] Ich möchte eine Möglichkeit einbauen, Favoriten wieder zu entfernen oder zu verwalten.
+- [ ] Ich möchte die Preistabelle erweitern, sodass Preisänderungen farbig (grün/rot) dargestellt werden.
+- [ ] Ich möchte die Webseite für mobile Geräte optimieren.
+- [ ] Ich möchte eine Kontakt Area machen, wo man den ersteller der Website sieht
+
 
 
 
