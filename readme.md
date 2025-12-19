@@ -3,7 +3,7 @@
 24.10. bis 19.12.2025
 
 ## Grob-Planung
-
+https://github.com/Amirirun/Lern-Periode-7/blob/main/readme.md
 1. Für welche API möchten Sie ein eigenes *front end* erstellen?
    coincap.io
 3. Welche groben Funktionalitäten soll Ihr *front end* zur Verfügung stellen?
@@ -78,8 +78,7 @@ Heute habe ich noch eine Menge am Design gearbeitet. Zudem habe ich noch einige 
 ## 12.12
 - [ ] Ich möchte eine Möglichkeit einbauen, Favoriten wieder zu entfernen oder zu verwalten.
 - [ ] Ich möchte die Preistabelle erweitern, sodass Preisänderungen farbig (grün/rot) dargestellt werden.
-- [ ] Ich möchte die Webseite für mobile Geräte optimieren.
-- [ ] Ich möchte eine Kontakt Area machen, wo man den ersteller der Website sieht
+
 
 
 
