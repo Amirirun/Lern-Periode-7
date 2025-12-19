@@ -121,3 +121,38 @@ canvas {
   padding: 10px;
   border-bottom: 1px solid #333;
 }
+
+.favorite-item {
+  display: inline-block;
+  margin: 4px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.favorite-item:hover {
+  background: #00ffff;
+  color: #121212;
+}
+
+.remove-fav {
+  margin-left: 8px;
+  color: #ff4444;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.remove-fav:hover {
+  color: red;
+}
+
+.green {
+  color: #00ff99;
+}
+
+.red {
+  color: #ff4444;
+}

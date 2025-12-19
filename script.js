@@ -25,17 +25,33 @@ function saveFavorites() {
   localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 
+function removeFavorite(coin) {
+  favorites = favorites.filter(f => f !== coin);
+  saveFavorites();
+  renderFavorites();
+}
+
 function renderFavorites() {
   favoritesDiv.innerHTML = '<span>Favoriten:</span>';
 
   favorites.forEach(coin => {
     const item = document.createElement('span');
-    item.textContent = coin;
     item.className = 'favorite-item';
+    item.innerHTML = `
+      ${coin}
+      <span class="remove-fav">✕</span>
+    `;
+
     item.onclick = () => {
       cryptoInput.value = coin;
       loadChart();
     };
+
+    item.querySelector('.remove-fav').onclick = e => {
+      e.stopPropagation();
+      removeFavorite(coin);
+    };
+
     favoritesDiv.appendChild(item);
   });
 }
@@ -169,15 +185,23 @@ async function loadPriceTable() {
 
   let html = `
     <table class="price-table">
-      <tr><th>Name</th><th>Preis</th><th>24h %</th></tr>
+      <tr>
+        <th>Name</th>
+        <th>Preis</th>
+        <th>24h %</th>
+      </tr>
   `;
 
   data.forEach(c => {
+    const changeClass = c.price_change_percentage_24h >= 0 ? 'green' : 'red';
+
     html += `
       <tr>
         <td>${c.name}</td>
         <td>$${c.current_price.toFixed(2)}</td>
-        <td>${c.price_change_percentage_24h.toFixed(2)}%</td>
+        <td class="${changeClass}">
+          ${c.price_change_percentage_24h.toFixed(2)}%
+        </td>
       </tr>
     `;
   });
