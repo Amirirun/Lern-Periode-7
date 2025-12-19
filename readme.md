@@ -11,6 +11,8 @@ https://github.com/Amirirun/Lern-Periode-7/blob/main/readme.md
 5. Was möchten Sie insbesondere dabei lernen oder üben?
    Lernen wie man Javascript richtig benutzt
 
+## Reflexion
+Während des gesamten Projekts habe ich gelernt, eine Webanwendung strukturiert zu planen und schrittweise weiterzuentwickeln. Ich habe mit HTML, CSS und JavaScript gearbeitet und externe APIs eingebunden, um reale Daten darzustellen. Besonders herausfordernd war das Beheben von Bugs, zum Beispiel bei der mehrfach angezeigten Preistabelle oder der Autosuche. Insgesamt hat mir das Projekt sehr viel spass gemacht und ich konnte viel lernen.
 
 ## 24.10.
 
@@ -76,8 +78,9 @@ Heute habe ich nichts für die Lern Periode 7 gemacht! Ich habe zusammen mit Dam
 Heute habe ich noch eine Menge am Design gearbeitet. Zudem habe ich noch einige funktionen wie höchst und Tiefpreis und hinzugefügt. Dann intigrierte ich auch noch eine favoriten Liste.
 
 ## 12.12
-- [ ] Ich möchte eine Möglichkeit einbauen, Favoriten wieder zu entfernen oder zu verwalten.
-- [ ] Ich möchte die Preistabelle erweitern, sodass Preisänderungen farbig (grün/rot) dargestellt werden.
+- [x] Ich möchte eine Möglichkeit einbauen, Favoriten wieder zu entfernen oder zu verwalten.
+- [x] Ich möchte die Preistabelle erweitern, sodass Preisänderungen farbig (grün/rot) dargestellt werden.
+
 
 
 
